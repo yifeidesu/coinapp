@@ -1,0 +1,81 @@
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Antic!important;
+  min-height: 100%;
+}
+
+#root {
+  padding:8rem 8rem;
+  min-height: 100%;
+}
+
+/* TOPBAR STYLES */
+#topbar {
+  padding: 0.5rem 8rem;
+  background-color: #212F67;
+}
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+p.navbar-brand {
+  font-size: 2rem;
+  font-weight: 900!important;
+  margin-bottom: 0;
+  color: white;
+}
+
+#topbar ul {
+  float: right!important;
+  color: rgba(255, 255, 255, 0.8)
+}
+
+#topbar ul a{
+  color: rgba(255, 255, 255, 0.8)
+}
+
+/* above are topbar styles */
+
+/* SIDEBAR */
+#sidebar ul li a {
+  font-weight: 900!important;
+  font-size: large;
+  color: rgba(0, 0, 0, 0.8)!important;
+}
+
+/* CONTENT */
+#content {
+  padding: 0 8rem!important;
+  letter-spacing: 2px;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+  padding-left: 2rem;
+}
+
+#rate-div {
+  color: white;
+  background-color: #FA724F;
+}
+
+#update-div {
+  background-color: #ECE7DE;
+}
+
+.btn {
+  width: 100%;
+  letter-spacing: 2px;
+  border-radius: 0;
+  background-color: rgb(48, 255, 186);
+}
+
+/* FOOTER */
+footer a {
+  padding: 1rem;
+}
