@@ -1,8 +1,8 @@
 import React from 'react';
 import Axios from "axios";
-import { Doughnut } from 'react-chartjs-2';
+
 import { Line } from 'react-chartjs-2';
-import { withRouter } from 'react-router-dom';
+
 
 var categoryUpdate;
 
@@ -11,10 +11,20 @@ class MyChart extends React.Component {
         super(props);
         console.log(props);
 
+        // const Chart = ({ match }) => {
+
+        //     const categoryId = match.params.categoryId;
+        //     return (<MyChart category={categoryId} />);
+        //   };
+        console.log('=== MyChart');
+
+        var a = this;
+        //match.params.categoryId
+        console.log(a);
+
         this.state = { dates: [], prices: [], category: 'mon' };
         this.getHistorical = this.getHistorical.bind(this);
     }
-
 
     componentDidMount() {
         this.getHistorical();
@@ -22,15 +32,15 @@ class MyChart extends React.Component {
 
 
     componentWillReceiveProps(nextProp) {
-        // update category with nextProp
-        categoryUpdate = Object.values(nextProp)[0];
-       
+        
+        categoryUpdate = nextProp.match.params.categoryId;
+        
         this.setState({ category: categoryUpdate });
         this.getHistorical();
     }
 
     getHistorical() {
-      
+
         // base url
         let endpoint = 'https://api.coindesk.com/v1/bpi/historical/close.json';
 
@@ -45,7 +55,7 @@ class MyChart extends React.Component {
             case 'year':
                 endpoint = getEndpoint(365);
                 break;
-            default: 
+            default:
                 endpoint = getEndpoint(31);
         }
 
@@ -66,7 +76,7 @@ class MyChart extends React.Component {
     }
 
     render() {
-        
+
         return (
             <div>
                 <h1>Historical BPI in <span>USD</span></h1>
