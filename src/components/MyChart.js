@@ -1,6 +1,5 @@
 import React from 'react';
 import Axios from "axios";
-
 import { Line } from 'react-chartjs-2';
 
 
@@ -10,31 +9,21 @@ class MyChart extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-
-        // const Chart = ({ match }) => {
-
-        //     const categoryId = match.params.categoryId;
-        //     return (<MyChart category={categoryId} />);
-        //   };
-        console.log('=== MyChart');
-
-        var a = this;
-        //match.params.categoryId
-        console.log(a);
-
+        
         this.state = { dates: [], prices: [], category: 'mon' };
         this.getHistorical = this.getHistorical.bind(this);
     }
 
+    // initial data fetch
     componentDidMount() {
         this.getHistorical();
     }
 
-
+    // update data by category
     componentWillReceiveProps(nextProp) {
         
         categoryUpdate = nextProp.match.params.categoryId;
-        
+
         this.setState({ category: categoryUpdate });
         this.getHistorical();
     }
@@ -120,7 +109,7 @@ function getFormattedDate(period) {
 
     let today = new Date();
 
-    // how many days from start to end in terms of milliseconds
+    // Number of days from start to end in terms of milliseconds
     let millis = today.getTime() - (period * 86400000);
     let formattedDate = new Date(millis).toISOString().slice(0, 10);
 
