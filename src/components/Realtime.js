@@ -1,5 +1,7 @@
 import React from 'react';
-import Axios from "axios";
+import Axios from 'axios';
+import { fetchNew } from '../apiServices';
+
 
 class Realtime extends React.Component {
     constructor(props) {
@@ -8,7 +10,6 @@ class Realtime extends React.Component {
             date: new Date(), chartName: '',
             usdRate: 'Loading...', lastUpdate: ''
         };
-        this.fetchNew = this.fetchNew.bind(this);
     }
 
     render() {
@@ -23,14 +24,14 @@ class Realtime extends React.Component {
                 </div>
                 <div id='compare-div' className='jumbotron'>
                     <div className="row">
-                    <div className="col">
-                        <h1>100</h1>
-                        <p>Since Last Month, USD</p>
-                    </div>
-                    <div className="col">
-                        <h1>200</h1>
-                        <p>Since Last Month, %</p>
-                    </div>
+                        <div className="col">
+                            <h1>100</h1>
+                            <p>Since Last Month, USD</p>
+                        </div>
+                        <div className="col">
+                            <h1>200</h1>
+                            <p>Since Last Month, %</p>
+                        </div>
                     </div>
                 </div>
                 <div id='update-div' className='jumbotron'>
@@ -41,29 +42,7 @@ class Realtime extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchNew();
-    }
-
-    fetchNew() {
-        const index_endpoint = 'https://api.coindesk.com/v1/bpi/currentprice.json';
-        Axios.get(index_endpoint)
-            .then(res => {
-                console.log(res);
-                const chartName = res.data.chartName;
-                const usdRate = res.data.bpi.USD.rate;
-                const lastUpdate = res.data.time.updated;
-                this.setState({
-                    chartName: chartName,
-                    usdRate: usdRate,
-                    lastUpdate: lastUpdate
-                });
-
-                console.log('SETSTATE CALLED!');
-
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        fetchNew(this);
     }
 }
 

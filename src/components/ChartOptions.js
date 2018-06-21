@@ -14,7 +14,7 @@ class ChartOptions extends React.Component {
         return (
             <nav>
                 <li>
-                    <Link to={`${match.url}/wk`}>Week</Link>
+                    <Link to={`${match.url}/week`}>Week</Link>
                 </li>
                 <li>
                     <Link to={`${match.url}/mon`}>Month</Link>
