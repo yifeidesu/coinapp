@@ -1,4 +1,4 @@
-## [Click to visit the site](https://yifeidesu.github.io/coinapp/)
+## [:zap: Click to visit the site](https://yifeidesu.github.io/coinapp/)
 
 ## Overview
 
