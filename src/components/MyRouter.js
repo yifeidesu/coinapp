@@ -23,16 +23,7 @@ const routes = [
       </div>
 
   },
-  {
-    path: "/charts",
-    sidebar: () => <div>Charts
-      <ul>
-        <li>week</li>
-        <li>month</li>
-      </ul>
-    </div>,
-    main: () => <h2>chart content </h2>
-  }
+ 
 ];
 
 const MyRouter = () => {
@@ -79,7 +70,6 @@ const MyRouter = () => {
                 />
               ))}
             </div>
-
 
             <Route exact path="/" component={Realtime} />
             <Switch>

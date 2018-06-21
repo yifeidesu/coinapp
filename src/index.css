@@ -19,7 +19,7 @@ body {
   padding: 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
   color: black;
-  background: #eee0ff;
+  background: #ebebec;
 }
 
 #sidebar nav {
@@ -80,18 +80,25 @@ li a:hover {
   color: white;
   background-color: #FA724F;
 }
-#compare-div{
 
-} 
 #update-div {
   background-color: #ECE7DE;
 }
+.btn-group {
+  border-radius: 1rem!important;
+  padding-bottom: 1rem;
+}
 
 .btn {
-  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 2px;
-  border-radius: 0;
-  background-color: rgb(48, 255, 186);
+  padding: 0.25rem 1.5rem;
+  background-color: #304FFE;
+}
+
+#chart-header {
+  padding: 1rem 0;
 }
 
 /* FOOTER */

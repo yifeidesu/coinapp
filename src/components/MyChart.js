@@ -4,23 +4,20 @@ import { Line } from 'react-chartjs-2';
 import { getHistorical } from '../apiServices';
 import { Link } from 'react-router-dom';
 
-
-var categoryUpdate = 'mon';
-
+let categoryUpdate = 'mon';
 class MyChart extends React.Component {
+
+
     constructor(props) {
         super(props);
-        console.log(props);
 
         this.state = { dates: [], prices: [], category: 'mon' };
-        // this.getHistorical = this.getHistorical.bind(this);
     }
 
     // initial data fetch
     componentDidMount() {
         console.log('componentDidMount called');
 
-        //this.getHistorical();
         getHistorical(this, categoryUpdate);
     }
 
@@ -28,15 +25,9 @@ class MyChart extends React.Component {
     componentWillReceiveProps(nextProp) {
         console.log('componentWillReceiveProps called');
 
-
-
         categoryUpdate = nextProp.match.params.categoryId;
-        console.log(categoryUpdate);
-
-
         this.setState({ category: categoryUpdate });
 
-        //this.getHistorical();
         getHistorical(this, categoryUpdate);
     }
 
@@ -44,13 +35,12 @@ class MyChart extends React.Component {
 
         return (
             <div>
-                <h1>Historical BPI in <span>USD</span></h1>
-
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <Link to="/charts/week" type="button" class="btn btn-secondary">1 Week</Link>
-                    <Link to="/charts/month" type="button" class="btn btn-secondary">1 Month</Link>
-                    <Link to="/charts/month3" type="button" class="btn btn-secondary">3 Months</Link>
-                    <Link to="/charts/year" type="button" class="btn btn-secondary">1 Year</Link>
+                <h1 id='chart-header'>Historical Price in <span>USD</span></h1>
+                <div class="btn-group" role="group">
+                    <Link to="/charts/week" type="button" class="btn btn-secondary">1W</Link>
+                    <Link to="/charts/month" type="button" class="btn btn-secondary">1M</Link>
+                    <Link to="/charts/month3" type="button" class="btn btn-secondary">3M</Link>
+                    <Link to="/charts/year" type="button" class="btn btn-secondary">1Y</Link>
                 </div>
 
                 <Line data={
@@ -58,14 +48,13 @@ class MyChart extends React.Component {
                         labels: this.state.dates,
                         datasets: [{
                             data: this.state.prices,
-                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            borderColor: 'rgba(255,165,0,1)',
+                            backgroundColor: 'rgba(48,79,254,0.2)',
+                            borderColor: '#304FFE',
                             borderWidth: 4,
                             pointRadius: 0,
                             pointHoverRadius: 4,
                             pointHoverBorderColor: 'rbg(0,0,0)',
-                            lineTension:0
-                            
+                            lineTension: 0.1
                         }],
                     }
                 } options={{
@@ -75,7 +64,6 @@ class MyChart extends React.Component {
                     responsive: true,
                     title: {
                         display: true,
-                        
                     },
                     tooltips: {
                         mode: 'index',
@@ -90,7 +78,6 @@ class MyChart extends React.Component {
                             display: true,
                             scaleLabel: {
                                 display: true,
-
                                 labelString: 'Month'
                             },
                             gridLines: { color: "#eeeeee", drawBorder: true }
@@ -100,56 +87,19 @@ class MyChart extends React.Component {
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Price, USD'
-
                             },
                             gridLines: {
                                 color: "#eeeeee",
                                 drawBorder: true,
-                                
-                                zeroLineColor: 'red',
                                 zeroLineWidth: '5px'
                             },
-                          
-
                         }]
                     }
                 }}
-
                 />
             </div>
         );
     }
 }
-
-
-
-
-
-// /**
-//  * 
-//  * @param {Number} numberOfDays returns an endpoint to get data since numberOfDays ago.
-//  */
-// function getEndpoint(numberOfDays) {
-//     let historical_endpoint = 'https://api.coindesk.com/v1/bpi/historical/close.json';
-//     let end = getFormattedDate(1);
-//     let start = getFormattedDate(numberOfDays);
-//     var endpoint = historical_endpoint + '?start=' + start + '&end=' + end;
-//     return endpoint;
-// }
-
-// /**
-//  * 
-//  * @param {Number} period number of days between start and end dates.
-//  */
-// function getFormattedDate(period) {
-
-//     let today = new Date();
-
-//     // Number of days from start to end in terms of milliseconds
-//     let millis = today.getTime() - (period * 86400000);
-//     let formattedDate = new Date(millis).toISOString().slice(0, 10);
-
-//     return formattedDate;
-// }
 
 export default MyChart;
