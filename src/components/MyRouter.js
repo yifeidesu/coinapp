@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
 import Realtime from "./Realtime";
 import MyChart from "./MyChart";
-import ChartOptions from './ChartOptions'
 
 const routes = [
   // Root route
@@ -21,9 +20,7 @@ const routes = [
         <h2>realtime conent </h2>
         <Realtime />
       </div>
-
   },
- 
 ];
 
 const MyRouter = () => {
@@ -48,7 +45,6 @@ const MyRouter = () => {
                   <li>
                     <Link to="/charts">Charts</Link>
                   </li>
-
                 </ul>
                 <ul>
 

@@ -37,20 +37,23 @@ function getHistorical(component, category) {
 
         case 'week':
             endpoint = getEndpoint(7);
+            document.getElementById('period-type').textContent = 'Last Week';           
             break;
         case 'month3':
             endpoint = getEndpoint(90);
+            document.getElementById('period-type').textContent = 'Last 3 Month';
             break;
         case 'year':
             endpoint = getEndpoint(365);
+            document.getElementById('period-type').textContent = 'Last Year';
             break;
         default:
             endpoint = getEndpoint(31);
+            document.getElementById('period-type').textContent = 'Last Month';
     }
 
     Axios.get(endpoint)
         .then(res => {
-            
             
             const bpi = res.data.bpi;
             const dates = Object.keys(bpi);
