@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
 import Realtime from "./Realtime";
 import MyChart from "./MyChart";
+import Home from "./Home";
 
 const routes = [
   // Root route
@@ -9,26 +10,27 @@ const routes = [
     path: "/",
     exact: true,
     sidebar: () => '',
-    main: () => <h2>Home</h2>
+    main: () => <Home />
   },
 
   {
     path: "/realtime",
     sidebar: () => <div>Realtime</div>,
     main: () =>
-      <div>
-        <h2>realtime conent </h2>
+      <div>      
         <Realtime />
       </div>
   },
 ];
 
 const MyRouter = () => {
+  
+
   return (
     <Router>
       <div className="container-fluid">
         <div className='row'>
-          <nav id='sidebar' className='col-md-2'>
+          <nav id='sidebar' className='col-md-2 d-none d-md-block'>
             <nav className="navbar d-flex justify-content-center align-items-start">
               <div className="sidebar-sticky">
                 <div className='text-center'>
@@ -36,20 +38,18 @@ const MyRouter = () => {
                 </div>
                 <ul>
                   <li>
-                    {/* link to path */}
-                    <Link to="/">Home</Link>
+                    <Link to="/"><i className="fas fa-home"></i>Home</Link>
                   </li>
                   <li>
-                    <Link to="/realtime">Realtime</Link>
+                    <Link to="/realtime"><i className="fas fa-clock"></i>Realtime</Link>
                   </li>
                   <li>
-                    <Link to="/charts">Charts</Link>
+                    <Link to="/charts"><i className="fas fa-chart-line"></i>Charts</Link>
                   </li>
                 </ul>
                 <ul>
-
-                  <li><a href="https://github.com/yifeidesu/coinapp">GitHub Repo</a></li>
-                  <li><a href="https://www.coindesk.com/api/">API Source</a></li>
+                  <li><a href="https://github.com/yifeidesu/coinapp"><i className="fab fa-github-alt"></i>GitHub Repo</a></li>
+                  <li><a href="https://www.coindesk.com/api/"><i className="fas fa-database"></i>API Source</a></li>
                 </ul>
               </div>
             </nav>
@@ -66,8 +66,7 @@ const MyRouter = () => {
                 />
               ))}
             </div>
-
-            <Route exact path="/" component={Realtime} />
+            
             <Switch>
               <Route path="/charts/:categoryId" component={MyChart} />
               <Redirect from="/charts" to="/charts/mon" />

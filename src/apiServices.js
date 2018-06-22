@@ -17,27 +17,51 @@ function fetchNew(component) {
                 usdRate: usdRate,
                 lastUpdate: lastUpdate
             });
+            setLastWeekChange(component, usdRate);
         })
         .catch(err => {
             console.log(err);
-        });    
+        });
 };
+
+/**
+ * Set state of change and change percent to given component.
+ * @param {React.Component} component 
+ * @param {String} priceCurrent 
+ */
+function setLastWeekChange(component, priceCurrent) {
+
+    const lastWeek = getEndpoint(7);
+
+    Axios.get(lastWeek)
+        .then(res => {
+
+            const bpi = res.data.bpi;
+            const prices = Object.values(bpi);
+            const priceLastWeek = prices[0];
+
+            priceCurrent = parseFloat(priceCurrent.replace(/,/g, ''));
+
+            const changeLastWeek = (priceCurrent - priceLastWeek).toFixed(2);
+            const changeLastWeekPercent = ((changeLastWeek / priceLastWeek) * 100).toFixed(2);
+
+            component.setState({ changeLastWeek: changeLastWeek, changeLastWeekPercent: changeLastWeekPercent });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 // Historical data
 function getHistorical(component, category) {
-
-    console.log('getHistorical, new received cate ===');
-    console.log(category);
-
     // historical data url
     let endpoint = 'https://api.coindesk.com/v1/bpi/historical/close.json';
 
-    
     switch (category) {
 
         case 'week':
             endpoint = getEndpoint(7);
-            document.getElementById('period-type').textContent = 'Last Week';           
+            document.getElementById('period-type').textContent = 'Last Week';
             break;
         case 'month3':
             endpoint = getEndpoint(90);
@@ -54,14 +78,14 @@ function getHistorical(component, category) {
 
     Axios.get(endpoint)
         .then(res => {
-            
+
             const bpi = res.data.bpi;
             const dates = Object.keys(bpi);
             const prices = Object.values(bpi);
 
             component.setState({ dates: dates, prices: prices });
-       
-            console.log("historial data get!");      
+
+            console.log("historial data get!");
         })
         .catch(err => {
             console.log(err);
@@ -94,6 +118,15 @@ function getFormattedDate(period) {
 
     return formattedDate;
 }
-//var categoryUpdate;
 
-export { fetchNew, getHistorical };
+function getAve(arr) {
+    let sum = 0;
+    let len = arr.length;
+    arr.map((element) => {
+        sum += element;
+    });
+    return sum / len;
+}
+
+
+export { fetchNew, setLastWeekChange, getHistorical, getAve };
