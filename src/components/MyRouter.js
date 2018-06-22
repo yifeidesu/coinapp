@@ -14,7 +14,7 @@ const routes = [
   },
 
   {
-    path: "/realtime",
+    path: "/coinapp/realtime",
     sidebar: () => <div>Realtime</div>,
     main: () =>
       <div>      
@@ -67,8 +67,8 @@ const MyRouter = () => {
             </div>
             
             <Switch>
-              <Route path="/charts/:categoryId" component={MyChart} />
-              <Redirect from="/charts" to="/charts/mon" />
+              <Route path="coinapp/charts/:categoryId" component={MyChart} />
+              <Redirect from="coinapp/charts" to="/charts/mon" />
             </Switch>
           </div>
         </div>
