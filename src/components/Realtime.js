@@ -59,8 +59,6 @@ class Realtime extends React.Component {
             </div>
         );
     }
-
-
 }
 
 export default Realtime;

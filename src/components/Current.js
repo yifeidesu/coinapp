@@ -3,7 +3,9 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { setLastWeekChange, getHistorical, fetchNew } from '../apiServices';
 
-
+/**
+ * This component show current price in a jumbotron.
+ */
 class Current extends React.Component {
     constructor(props) {
         super(props);

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import MyRouter from './components/MyRouter';
+import CoinApp from './components/CoinApp';
 
-ReactDOM.render(<MyRouter />, document.getElementById('root'));
+ReactDOM.render(<CoinApp />, document.getElementById('root'));
 registerServiceWorker();

@@ -40,12 +40,12 @@ li {
 
 li:hover { 
   color: rgba(255, 255, 255, 0.9);
-  background-color: blueviolet;
+  background-color: rgba(138, 43, 226, 0.4);
   text-decoration: none;
 }
 
 li.active {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 1);
   background-color: blueviolet;
   text-decoration: none;
 }
