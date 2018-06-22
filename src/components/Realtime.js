@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchNew, setLastWeekChange, getAve } from '../apiServices';
+import { fetchNew } from '../apiServices';
 
 class Realtime extends React.Component {
     constructor(props) {

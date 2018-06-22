@@ -1,10 +1,6 @@
 
 import React from 'react';
-import Realtime from './Realtime';
-import Chart from './MyChart';
 import { setLastWeekChange } from '../apiServices';
-import MyChart from './MyChart';
-
 
 class Home extends React.Component {
     constructor(props) {

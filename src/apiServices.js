@@ -119,14 +119,6 @@ function getFormattedDate(period) {
     return formattedDate;
 }
 
-function getAve(arr) {
-    let sum = 0;
-    let len = arr.length;
-    arr.map((element) => {
-        sum += element;
-    });
-    return sum / len;
-}
 
 
-export { fetchNew, setLastWeekChange, getHistorical, getAve };
+export { fetchNew, setLastWeekChange, getHistorical };

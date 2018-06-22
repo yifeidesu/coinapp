@@ -24,7 +24,6 @@ const routes = [
 ];
 
 const MyRouter = () => {
-  
 
   return (
     <Router>
