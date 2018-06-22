@@ -1,5 +1,6 @@
 import React from 'react';
 import { fetchNew } from '../apiServices';
+import Current from './Current';
 
 class Realtime extends React.Component {
     constructor(props) {
@@ -20,8 +21,6 @@ class Realtime extends React.Component {
     }
 
     render() {
-
-
 
         let arrowHtml;
         let changeTextColor;
@@ -47,10 +46,11 @@ class Realtime extends React.Component {
                         <button id='refresh-btn' className='btn' onClick={function () { fetchNew(comp) }}>Refresh</button>
                     </div>
                 </div>
-                <div id='rate-div' className='jumbotron'>
+                <Current />
+                {/* <div id='rate-div' className='jumbotron'>
                     <p className='rt-text'>BTC current price</p>
                     <h1 className="display-1">$ {this.state.usdRate}</h1>
-                </div>
+                </div> */}
                 <div id='compare-div' className='jumbotron'>
                     <p className='rt-text'>Change since last week</p>
                     <h1 style={changeTextColor}>$ {this.state.changeLastWeek} ({this.state.changeLastWeekPercent}%) {arrowHtml}</h1>
