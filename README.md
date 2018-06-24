@@ -15,6 +15,7 @@ CoinApp is a web application that user can view and refresh for realtime bitcoin
 
 ## Screenshots
 
-![coinapp_screenshot](https://user-images.githubusercontent.com/23082500/41790319-32544e6e-7620-11e8-9bea-197379e1304d.png)
+![coinapp-homepage](https://user-images.githubusercontent.com/23082500/41815991-b5925c08-7747-11e8-99a4-71f01a98a5ee.png)
 
-![coinapp_screenshot](https://user-images.githubusercontent.com/23082500/41790320-326533fa-7620-11e8-820f-196408033ae7.png)
+![coinapp-fluc](https://user-images.githubusercontent.com/23082500/41815992-b5b1cdea-7747-11e8-916d-3128079e2d8b.png)
+
