@@ -22,7 +22,7 @@ class CoinApp extends React.Component {
   render() {
 
     return (
-      <Router className="">
+      <Router basename="/coinapp">
         <div className='row'>
           <div className='col-lg-2'>
             <Sidebar />
