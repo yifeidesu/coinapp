@@ -1,7 +1,5 @@
-
 import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { setLastWeekChange, getHistorical, fetchNew } from '../apiServices';
+import { fetchNew } from '../apiServices';
 
 /**
  * This component show current price in a jumbotron.
@@ -10,21 +8,21 @@ class Current extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(), chartName: '',
-            usdRate: 'Loading...', lastUpdate: ''
+            date: new Date(),
+            usdRate: 'Loading...',
+            lastUpdate: ''
         };
     }
 
     componentDidMount() {
-        fetchNew(this)
+        fetchNew(this, [7])
     }
 
     render() {
         return (
-                <div id='rate-div' className='jumbotron'>
-                    <p className='rt-text'>BTC current price</p>
-                    <h1 className="display-1">$ {this.state.usdRate}</h1>
-                </div>
+            <div id='rate-div' className='jumbotron' style={{ padding: 0 }}>
+                <h1>$ {this.state.usdRate}</h1>
+            </div>
         );
     }
 }

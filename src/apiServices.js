@@ -4,7 +4,7 @@ import Axios from 'axios';
  * Set state to given component with data fetched from endpoint.
  * @param {React.Component} component
  */
-function fetchNew(component) {
+function fetchNew(component, changeArr) {
     const index_endpoint = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 
     Axios.get(index_endpoint)
@@ -17,7 +17,9 @@ function fetchNew(component) {
                 usdRate: usdRate,
                 lastUpdate: lastUpdate
             });
-            setLastWeekChange(component, usdRate);
+            changeArr.forEach(element => {
+                setChange(component, usdRate, element);
+            });
         })
         .catch(err => {
             console.log(err);
@@ -29,23 +31,37 @@ function fetchNew(component) {
  * @param {React.Component} component 
  * @param {String} priceCurrent 
  */
-function setLastWeekChange(component, priceCurrent) {
+function setChange(component, priceCurrent, numberOfDays) {
 
-    const lastWeek = getEndpoint(7);
+    const endpoint = getEndpoint(numberOfDays);
 
-    Axios.get(lastWeek)
+    let periods = component.state.periods;
+    let changes = component.state.changes;
+    let changesPercent = component.state.changesPercent;
+
+    Axios.get(endpoint)
         .then(res => {
 
             const bpi = res.data.bpi;
             const prices = Object.values(bpi);
-            const priceLastWeek = prices[0];
+            const priceToCompare = prices[0];
 
             priceCurrent = parseFloat(priceCurrent.replace(/,/g, ''));
 
-            const changeLastWeek = (priceCurrent - priceLastWeek).toFixed(2);
-            const changeLastWeekPercent = ((changeLastWeek / priceLastWeek) * 100).toFixed(2);
+            const change = (priceCurrent - priceToCompare).toFixed(2);
+            const changePercent = ((change / priceToCompare) * 100).toFixed(2);
 
-            component.setState({ changeLastWeek: changeLastWeek, changeLastWeekPercent: changeLastWeekPercent });
+            periods.push(numberOfDays);
+            changes.push(change);
+            changesPercent.push(changePercent);
+
+            component.setState(
+                {
+                    periods: numberOfDays,
+                    changes: changes,
+                    changesPercent: changesPercent
+                }
+            );
         })
         .catch(err => {
             console.log(err);
@@ -53,28 +69,38 @@ function setLastWeekChange(component, priceCurrent) {
 }
 
 // Historical data
-function getHistorical(component, category) {
+function getHistorical(component, numberOfDays) {
     // historical data url
     let endpoint = 'https://api.coindesk.com/v1/bpi/historical/close.json';
 
-    switch (category) {
+    switch (numberOfDays) {
 
-        case 'week':
+        case 7:
             endpoint = getEndpoint(7);
-            //document.getElementById('period-type').textContent = 'Last Week';
             break;
-        case 'month3':
-            endpoint = getEndpoint(90);
-            // move to component
-            //document.getElementById('period-type').textContent = 'Last 3 Month';
+
+        case 31:
+            endpoint = getEndpoint(31);
             break;
-        case 'year':
+
+        case 91:
+            endpoint = getEndpoint(91);
+            break;
+
+        case 182:
+            endpoint = getEndpoint(182);
+            break;
+
+        case 365:
             endpoint = getEndpoint(365);
-            //document.getElementById('period-type').textContent = 'Last Year';
             break;
+
+        case 3000:
+            endpoint = getEndpointAll();
+            break;
+
         default:
             endpoint = getEndpoint(31);
-            //document.getElementById('period-type').textContent = 'Last Month';
     }
 
     Axios.get(endpoint)
@@ -85,8 +111,6 @@ function getHistorical(component, category) {
             const prices = Object.values(bpi);
 
             component.setState({ dates: dates, prices: prices });
-
-            console.log("historial data get!");
         })
         .catch(err => {
             console.log(err);
@@ -105,6 +129,15 @@ function getEndpoint(numberOfDays) {
     return endpoint;
 }
 
+function getEndpointAll() {
+    let historical_endpoint = 'https://api.coindesk.com/v1/bpi/historical/close.json';
+    let end = getFormattedDate(1);
+    let start = '2010-07-19';
+    var endpoint = historical_endpoint + '?start=' + start + '&end=' + end;
+    return endpoint;
+}
+
+
 /**
  * 
  * @param {Number} period number of days between start and end dates.
@@ -120,6 +153,4 @@ function getFormattedDate(period) {
     return formattedDate;
 }
 
-
-
-export { fetchNew, setLastWeekChange, getHistorical };
+export { fetchNew, setChange, getHistorical };

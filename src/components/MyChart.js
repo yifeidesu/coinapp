@@ -1,56 +1,39 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { getHistorical } from '../apiServices';
-import { Link } from 'react-router-dom';
+import ChartBtns from './ChartBtns.js';
 
-let categoryUpdate = 'mon';
+let category = 365;
 class MyChart extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { dates: [], prices: [], category: 'mon' };
+        this.state = { dates: [], prices: [], category: category };
     }
-
 
     // initial data fetch
     componentDidMount() {
-        console.log('componentDidMount called');
-
-        getHistorical(this, categoryUpdate);
+        getHistorical(this, 365);
     }
 
 
     // update data by category
     componentWillReceiveProps(nextProp) {
-        console.log('componentWillReceiveProps called');
-
-        categoryUpdate = nextProp.match.params.categoryId;
-        this.setState({ category: categoryUpdate });
-
-        getHistorical(this, categoryUpdate);
+        getHistorical(this, category);
     }
 
 
     render() {
-
         return (
             <div>
-                <h1 id='chart-header'>Historical Price in <span>USD</span></h1>
-                <p id='period-type'></p>
-                <div className="btn-group" role="group">
-                    <Link to="/charts/week" type="button" className="btn btn-primary">1W</Link>
-                    <Link to="/charts/month" type="button" className="btn btn-primary">1M</Link>
-                    <Link to="/charts/month3" type="button" className="btn btn-primary">3M</Link>
-                    <Link to="/charts/year" type="button" className="btn btn-primary">1Y</Link>
-                </div>
-
-                <Line data={
+                <ChartBtns comp={this} />
+                <Line id='line-graph' data={
                     {
                         labels: this.state.dates,
                         datasets: [{
                             data: this.state.prices,
-                            backgroundColor: 'rgba(48,79,254,0.2)',
-                            borderColor: '#304FFE',
+                            backgroundColor: 'rgba(137, 43, 226, 0.2)',
+                            borderColor: 'blueviolet',
                             borderWidth: 4,
                             pointRadius: 0,
                             pointHoverRadius: 4,
@@ -68,7 +51,7 @@ class MyChart extends React.Component {
                     },
                     tooltips: {
                         mode: 'index',
-                        intersect: false,
+                        intersect: true,
                     },
                     hover: {
                         mode: 'nearest',
@@ -81,9 +64,10 @@ class MyChart extends React.Component {
                                 display: true,
                                 labelString: 'Month'
                             },
-                            gridLines: { color: "#eeeeee", drawBorder: true }
+                            gridLines: { color: "#eeeeee", drawBorder: true },
                         }],
                         yAxes: [{
+                            id: 'y-axis-0',
                             display: true,
                             scaleLabel: {
                                 display: true,
@@ -94,8 +78,8 @@ class MyChart extends React.Component {
                                 drawBorder: true,
                                 zeroLineWidth: '5px'
                             },
-                        }]
-                    }
+                        }],
+                    },
                 }}
                 />
             </div>

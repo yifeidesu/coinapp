@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { setLastWeekChange, getHistorical, fetchNew } from '../apiServices';
-import Current from './Current';
+import { fetchNew } from '../apiServices';
+import Realtime from './Realtime';
 
 
 class Home extends React.Component {
@@ -15,24 +15,16 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        setLastWeekChange(this);
-        console.log(this.state);
-        console.log(this);
 
-        getHistorical(this, 'mon');
-        fetchNew(this)
+        //getHistorical(this, 31);
+        fetchNew(this, [7])
     }
 
     render() {
         return (
             <div>
-                <Current />
+                <Realtime />
 
-                
-                {/* <div id='rate-div' className='jumbotron'>
-                    <p className='rt-text'>BTC current price</p>
-                    <h1 className="display-1">$ {this.state.usdRate}</h1>
-                </div> */}
                 <Line data={
                     {
                         labels: this.state.dates,
