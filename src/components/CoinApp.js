@@ -68,7 +68,7 @@ const routes = [
   },
 
   {
-    path: "/fluctuations",
+    path: "/fluc",
     sidebar: () => <div>Fluctuations</div>,
     main: () => {
       return (
